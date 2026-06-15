@@ -8,6 +8,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.api.routes import router
 from src.config import settings
 
 logging.basicConfig(level=getattr(logging, settings.log_level.upper(), logging.INFO))
@@ -36,9 +37,8 @@ async def health():
     return {"status": "ok", "app": settings.app_name, "version": "0.1.0"}
 
 
-# ── API Router (to be populated) ──────────────────────────────
-# from src.api.routes import router
-# app.include_router(router, prefix="/api/v1")
+# ── API Router ────────────────────────────────────────────────
+app.include_router(router)
 
 
 def main() -> None:
